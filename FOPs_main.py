@@ -16,6 +16,7 @@ ans_dict = {
 class UI(Qtw.QWidget):
     def __init__(self):
         super().__init__()
+        self.tempMgb = None
         self.font = QFont()
         self.Btn_CSM = None
         self.Lb_SHW = None
@@ -37,15 +38,16 @@ class UI(Qtw.QWidget):
         self.Tb_SHW = self.ui.Tb_SHW
         self.Tb_SHW.setFont(self.font)
         self.Btn_SPW.clicked.connect(self.g_spawn)
+        self.Btn_CSM.clicked.connect(self.g_temp)
+        self.Btn_CHG.clicked.connect(self.g_temp)
         self.Btn_QT.clicked.connect(quit)
 
     def g_spawn(self):
         self.Tb_SHW.setText((ans_spawn(ans_dict[M_mode])))
-        pass
 
     def g_temp(self):
-        pass
-
+        self.tempMgb = Qtw.QMessageBox(text='功能开发中,敬请期待! /nThis function is developing,/n please sit and relax!')
+        self.tempMgb .exec()
 
 def ans_spawn(dt):
     t_list = dt['lt'].copy()
@@ -78,3 +80,4 @@ if __name__ == "__main__":
             os.system('cls')
             print(ans_spawn(ans_dict[M_mode]))
             os.system('pause')
+
