@@ -29,7 +29,7 @@ class UI(Qtw.QWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.ui = uic.loadUi("FOPs_GUI.ui")
+        self.ui = uic.loadUi(os.path.abspath("./FOPs_GUI.ui"))
         self.Btn_SPW = self.ui.Btn_SPW
         self.Btn_CHG = self.ui.Btn_CHG
         self.Btn_CSM = self.ui.Btn_CSM
@@ -40,14 +40,20 @@ class UI(Qtw.QWidget):
         self.Btn_SPW.clicked.connect(self.g_spawn)
         self.Btn_CSM.clicked.connect(self.g_temp)
         self.Btn_CHG.clicked.connect(self.g_temp)
-        self.Btn_QT.clicked.connect(quit)
+        self.Btn_QT.clicked.connect(sys.exit)
 
     def g_spawn(self):
         self.Tb_SHW.setText((ans_spawn(ans_dict[M_mode])))
 
     def g_temp(self):
-        self.tempMgb = Qtw.QMessageBox(text='功能开发中,敬请期待! /nThis function is developing,/n please sit and relax!')
-        self.tempMgb .exec()
+        self.tempMgb = Qtw.QMessageBox(
+            text='''
+功能开发中,敬请期待! 
+This function is developing,
+please sit and relax!
+            ''')
+        self.tempMgb.exec()
+
 
 def ans_spawn(dt):
     t_list = dt['lt'].copy()
@@ -80,4 +86,3 @@ if __name__ == "__main__":
             os.system('cls')
             print(ans_spawn(ans_dict[M_mode]))
             os.system('pause')
-
