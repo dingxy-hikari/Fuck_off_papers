@@ -6,7 +6,8 @@ import PyQt5.QtWidgets as Qtw
 from PyQt5 import uic
 from PyQt5.QtGui import QFont
 
-M_GUI = True
+M_gui = True
+M_mode = '15-4'
 ans_dict = {
     '15-4': {'lt': ['A', "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C", "D", "D", "D", "D", ], 'tm': 15},
     '10-4': {'lt': ['A', "A", "A", "B", "B", "B", "C", "C", "C", "D", "D", "D", ], 'tm': 10}}
@@ -39,19 +40,19 @@ class UI(Qtw.QWidget):
         self.Btn_QT.clicked.connect(quit)
 
     def g_spawn(self):
-        self.Tb_SHW.setText((ans_spawn(ans_dict['15-4']['lt'], ans_dict['15-4']['tm'])))
+        self.Tb_SHW.setText((ans_spawn(ans_dict[M_mode])))
         pass
 
     def g_temp(self):
         pass
 
 
-def ans_spawn(lt, tm):
-    t_list = lt.copy()
+def ans_spawn(dt):
+    t_list = dt['lt'].copy()
     opt = ''
     ct = 0
     i = 0
-    for i in range(tm):
+    for i in range(dt['tm']):
         if ct == 5:
             opt += ' '
             ct = 0
@@ -65,15 +66,15 @@ def ans_spawn(lt, tm):
 
 
 if __name__ == "__main__":
-    if M_GUI is True:
+    if M_gui is True:
         app = Qtw.QApplication(sys.argv)
         gui = UI()
         gui.ui.show()
         app.exec()
         a = Qtw.QTextBrowser()
 
-    elif M_GUI is False:
+    elif M_gui is False:
         while True:
             os.system('cls')
-            print(ans_spawn(ans_dict['15-4']['lt'], ans_dict['15-4']['tm']))
+            print(ans_spawn(ans_dict[M_mode]))
             os.system('pause')
